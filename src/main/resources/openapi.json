@@ -1,0 +1,69 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "description": "CodeAcademy API",
+        "version": "0.0.1",
+        "title": "CodeAcademy API"
+    },
+    "servers": [
+        {
+            "url": "/",
+            "description": "MyServer"
+        }
+    ],
+    "paths": {
+    },
+    "components": {
+        "schemas": {
+            "ChatMessageDTO": {
+                "type": "object",
+                "properties": {
+                    "author": {
+                        "type": "string",
+                        "example": "Mozart"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Er dritings"
+                    },
+                    "messageTime": {
+                        "type": "string",
+                        "example": "2024-01-01T00:00:00Z"
+                    },
+                    "isVerySecret": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "required": [
+                    "author",
+                    "message",
+                    "messageTime"
+                ]
+            },
+            "ChatMessageExtendedDTO": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/ChatMessageDTO"
+                    },
+                    {
+                        "properties": {
+                            "happy":{
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                ]
+            },
+            "ChatTypeEnum": {
+                "type": "string",
+                "enum": [
+                    "NEW",
+                    "EDIT",
+                    "SAVE"
+                ]
+            }
+        }
+    }
+}
