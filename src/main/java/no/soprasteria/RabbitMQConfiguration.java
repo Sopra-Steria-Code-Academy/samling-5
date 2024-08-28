@@ -22,7 +22,7 @@ public class RabbitMQConfiguration {
 
 
     public Channel ensureQueuesAndExchanges(Channel channel) throws IOException {
-        channel.exchangeDeclare(EXCHANGE_NAME, "direct", true);
+        channel.exchangeDeclare(EXCHANGE_NAME, "topic", true);
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
         channel.queueDeclare(SECRET_QUEUE_NAME, true, false, false, null);
         channel.queueDeclare(POLICE_SECRET_QUEUE_NAME, true, false, false, null);
