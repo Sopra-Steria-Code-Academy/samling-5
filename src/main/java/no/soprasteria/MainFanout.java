@@ -12,7 +12,7 @@ import java.util.concurrent.TimeoutException;
 
 import static no.soprasteria.RabbitMQConfiguration.*;
 
-public class Main {
+public class MainFanout {
 
     private static final Properties properties;
     private ObjectMapper mapper = new ObjectMapper();
@@ -21,7 +21,7 @@ public class Main {
         properties = new Properties();
 
         try {
-            ClassLoader classLoader = Main.class.getClassLoader();
+            ClassLoader classLoader = MainFanout.class.getClassLoader();
             InputStream applicationPropertiesStream = classLoader.getResourceAsStream("application.properties");
             properties.load(applicationPropertiesStream);
         } catch (Exception e) {
@@ -30,23 +30,20 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException, TimeoutException {
-        new Main().run();
+        new MainFanout().run();
     }
 
     public void run() throws IOException, TimeoutException {
-        System.out.println("Hello world from Oslo!");
+        System.out.println("Server started!");
         RabbitMQConnectionHelper rabbitMQConnectionHelper = new RabbitMQConnectionHelper(properties);
         RabbitMQConfiguration rabbitMQConfiguration = new RabbitMQConfiguration();
         Channel channel = rabbitMQConfiguration.ensureQueuesAndExchanges(rabbitMQConnectionHelper.getConnection().createChannel());
 
         try {
-            boolean isSecret = false;
             while (true) {
-                ChatMessageDTO msgToSend = new ChatMessageDTO("Mozart", "Fur Elise", OffsetDateTime.now().toString());
-                msgToSend.isVerySecret(isSecret);
-                publishMessage(channel, mapper.writeValueAsString(msgToSend), EXCHANGE_NAME, isSecret ? SECRET_ROUTING_KEY : ROUTING_KEY);
+                ChatMessageDTO msgToSend = new ChatMessageDTO("Leeroy", "Jeeeenkiiiins", OffsetDateTime.now().toString());
+                publishMessage(channel, mapper.writeValueAsString(msgToSend), EXCHANGE_NAME_FANOUT, "");
                 Thread.sleep(5000);
-                isSecret = !isSecret;
             }
         } catch (Exception e) {
             System.out.println("Failed to publish message: " + e.getMessage());

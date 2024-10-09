@@ -33,14 +33,14 @@ public class Main2 {
     }
 
     public void run() {
-        System.out.println("Hello world from Denmark!");
+        System.out.println("Server started Main2!");
         RabbitMQConnectionHelper rabbitMQConnectionHelper = new RabbitMQConnectionHelper(properties);
         RabbitMQConfiguration rabbitMQConfiguration = new RabbitMQConfiguration();
         try {
             Connection connection = rabbitMQConnectionHelper.getConnection();
             Channel channel = rabbitMQConfiguration.ensureQueuesAndExchanges(connection.createChannel());
             try {
-                channel.basicConsume(rabbitMQConfiguration.getQUEUE_NAME(), false, "teacher" + UUID.randomUUID(),
+                channel.basicConsume(RabbitMQConfiguration.FANOUT_QUEUE_NAME, false, "kongshem" + UUID.randomUUID(),
                         new DefaultConsumer(channel) {
                             @Override
                             public void handleDelivery(String consumerTag,
