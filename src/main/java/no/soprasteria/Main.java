@@ -38,6 +38,7 @@ public class Main {
         RabbitMQConnectionHelper rabbitMQConnectionHelper = new RabbitMQConnectionHelper(properties);
         RabbitMQConfiguration rabbitMQConfiguration = new RabbitMQConfiguration();
         Channel channel = rabbitMQConfiguration.ensureQueuesAndExchanges(rabbitMQConnectionHelper.getConnection().createChannel());
+//        Channel channel = rabbitMQConnectionHelper.getConnection().createChannel();
 
         try {
             boolean isSecret = false;

@@ -38,7 +38,8 @@ public class Main2 {
         RabbitMQConfiguration rabbitMQConfiguration = new RabbitMQConfiguration();
         try {
             Connection connection = rabbitMQConnectionHelper.getConnection();
-            Channel channel = rabbitMQConfiguration.ensureQueuesAndExchanges(connection.createChannel());
+            Channel channel = connection.createChannel();
+//            Channel channel = rabbitMQConfiguration.ensureQueuesAndExchanges(connection.createChannel());
             try {
                 channel.basicConsume(RabbitMQConfiguration.FANOUT_QUEUE_NAME, false, "kongshem" + UUID.randomUUID(),
                         new DefaultConsumer(channel) {

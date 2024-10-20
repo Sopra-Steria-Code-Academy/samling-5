@@ -16,6 +16,8 @@ public class RabbitMQConnectionHelper {
     }
 
     public Connection getConnection() throws IOException, TimeoutException {
+        String appMasterKeyFromEnv = System.getenv("MASTER_KEY_CODE_ACADEMY_RABBITMQ");
+
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUsername(properties.getProperty("rabbitmq.userName"));
         factory.setPassword(properties.getProperty("rabbitmq.password"));

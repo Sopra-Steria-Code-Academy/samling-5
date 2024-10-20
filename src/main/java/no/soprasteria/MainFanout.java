@@ -38,7 +38,7 @@ public class MainFanout {
         RabbitMQConnectionHelper rabbitMQConnectionHelper = new RabbitMQConnectionHelper(properties);
         RabbitMQConfiguration rabbitMQConfiguration = new RabbitMQConfiguration();
         Channel channel = rabbitMQConfiguration.ensureQueuesAndExchanges(rabbitMQConnectionHelper.getConnection().createChannel());
-
+//        Channel channel = rabbitMQConnectionHelper.getConnection().createChannel();
         try {
             while (true) {
                 ChatMessageDTO msgToSend = new ChatMessageDTO("Leeroy", "Jeeeenkiiiins", OffsetDateTime.now().toString());
