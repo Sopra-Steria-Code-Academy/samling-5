@@ -1,4 +1,5 @@
 package no.soprasteria;
+
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
@@ -16,16 +17,13 @@ public class RabbitMQConnectionHelper {
     }
 
     public Connection getConnection() throws IOException, TimeoutException {
-        String appMasterKeyFromEnv = System.getenv("MASTER_KEY_CODE_ACADEMY_RABBITMQ");
-
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUsername(properties.getProperty("rabbitmq.userName"));
         factory.setPassword(properties.getProperty("rabbitmq.password"));
         factory.setVirtualHost(properties.getProperty("rabbitmq.vhost"));
         factory.setHost(properties.getProperty("rabbitmq.host"));
-        factory.setPort(Integer.parseInt(properties.getProperty("rabbitmq.port","5672")));
+        factory.setPort(Integer.parseInt(properties.getProperty("rabbitmq.port", "5672")));
 
-        Connection conn = factory.newConnection();
-        return conn;
+        return factory.newConnection();
     }
 }

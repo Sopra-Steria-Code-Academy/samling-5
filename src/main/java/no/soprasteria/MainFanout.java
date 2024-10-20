@@ -2,15 +2,11 @@ package no.soprasteria;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
-import no.soprasteria.generated.models.ChatMessageDTO;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.OffsetDateTime;
 import java.util.Properties;
 import java.util.concurrent.TimeoutException;
-
-import static no.soprasteria.RabbitMQConfiguration.*;
 
 public class MainFanout {
 
@@ -38,12 +34,11 @@ public class MainFanout {
         RabbitMQConnectionHelper rabbitMQConnectionHelper = new RabbitMQConnectionHelper(properties);
         RabbitMQConfiguration rabbitMQConfiguration = new RabbitMQConfiguration();
         Channel channel = rabbitMQConfiguration.ensureQueuesAndExchanges(rabbitMQConnectionHelper.getConnection().createChannel());
-//        Channel channel = rabbitMQConnectionHelper.getConnection().createChannel();
         try {
             while (true) {
-                ChatMessageDTO msgToSend = new ChatMessageDTO("Leeroy", "Jeeeenkiiiins", OffsetDateTime.now().toString());
-                publishMessage(channel, mapper.writeValueAsString(msgToSend), EXCHANGE_NAME_FANOUT, "");
-                Thread.sleep(5000);
+                //Create a message
+                //Publish the message to exchange
+                //Sleep for N seconds
             }
         } catch (Exception e) {
             System.out.println("Failed to publish message: " + e.getMessage());
