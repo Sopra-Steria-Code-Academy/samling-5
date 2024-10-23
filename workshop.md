@@ -45,4 +45,4 @@ Post annen hver melding med routingkey = 'soprasteria' og routingkey = 'sopraste
 1. Lag deg en program som publiserer og consumerer mange hundre meldinger i sekundet
 2. Øk prefetch counten til noe stort
 3. Hvordan kan du sørge for disconnecte gracefully når man har satt en høy prefetch count? Hva skjer med meldingene som er prefetched, når consumeren f.eks feiler eller restarter? Er meldingene tapt? Hint: ShutDownSignal
-4. 
+4. Prøv å send en fil over rabbitmq. Hvordan får man til det?
