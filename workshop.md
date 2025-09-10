@@ -1,5 +1,5 @@
 ## Oppgaver
-
+Hei!
 ### Forarbeid
 1. Sørg for at du får startet en lokal instans av rabbitmq i docker. Bruk docker-compose fila. 
 Default så kan du kommunisere med rabbitmq på port 5672. 
